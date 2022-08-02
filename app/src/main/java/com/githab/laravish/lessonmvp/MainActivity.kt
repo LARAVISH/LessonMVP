@@ -4,44 +4,34 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.githab.laravish.lessonmvp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
-    private val counters = mutableListOf(0, 0, 0)
+    private lateinit var presenter: CounterPresenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initView()
+        initPresenter()
 
         with(binding) {
-            btnOne.setOnClickListener { textViewOne.text = "${++counters[0]}" }
-            btnTwo.setOnClickListener { textViewTwo.text = "${++counters[1]}" }
-            btnThree.setOnClickListener { textViewThree.text = "${++counters[2]}" }
+            btnOne.setOnClickListener { presenter.onCounterClick(R.id.btnOne) }
+            btnTwo.setOnClickListener { presenter.onCounterClick(R.id.btnTwo) }
+            btnThree.setOnClickListener { presenter.onCounterClick(R.id.btnThree) }
         }
     }
 
-    private fun initView() = with(binding) {
-        textViewOne.text = "${counters[0]}"
-        textViewTwo.text = "${counters[1]}"
-        textViewThree.text = "${counters[2]}"
+    private fun initPresenter() {
+        presenter = CounterPresenter(this)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putIntArray("KEY", counters.toIntArray())
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val array = savedInstanceState.getIntArray("KEY")
-        counters.let { list ->
-            list.clear()
-            array?.toList()?.let {
-                list.addAll(it)
-            }
+    override fun setText(counter: String, position: Int) = with(binding) {
+        when (position) {
+            0 -> textViewOne.text = counter
+            1 -> textViewTwo.text = counter
+            2 -> textViewThree.text = counter
         }
-        initView()
     }
 }
