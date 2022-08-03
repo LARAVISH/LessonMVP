@@ -1,7 +1,7 @@
 package com.githab.laravish.lessonmvp
 
 class CounterModel {
-    private val counters = mutableListOf(0, 0, 0)
+    private var counters = mutableListOf(ITEM_COUNTERS, ITEM_COUNTERS, ITEM_COUNTERS)
 
     fun getCurrent(position: Int): Int {
         return counters[position]
