@@ -1,4 +1,4 @@
-package com.githab.laravish.lessonmvp.main.adapter
+package com.githab.laravish.lessonmvp.user.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.githab.laravish.lessonmvp.R
+import com.githab.laravish.lessonmvp.cor.ItemOnClickItemListener
 import com.githab.laravish.lessonmvp.model.GithubUser
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {
+class UserAdapter(private val listener: ItemOnClickItemListener) :
+    RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {
 
     var users: List<GithubUser> = emptyList()
         set(value) {
@@ -35,6 +37,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.GithubUserViewHolder>() {
 
         fun bind(item: GithubUser) = with(item) {
             tvLogin.text = login
+            itemView.setOnClickListener {
+                listener.onClick(item)
+            }
         }
     }
 }

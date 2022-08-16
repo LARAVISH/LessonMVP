@@ -1,10 +1,15 @@
 package com.githab.laravish.lessonmvp.user
 
+import com.githab.laravish.lessonmvp.cor.nav.DetailsUsersScreen
 import com.githab.laravish.lessonmvp.repository.impl.GithubRepositoryImpl
 import com.github.terrakok.cicerone.Router
+import moxy.InjectViewState
 import moxy.MvpPresenter
 
-class UserPresenter(private val githubRepo: GithubRepositoryImpl, private val router: Router) :
+@InjectViewState
+class UserPresenter(
+    private val githubRepo: GithubRepositoryImpl, private val router: Router,
+) :
     MvpPresenter<UserView>() {
 
     override fun onFirstViewAttach() {
@@ -15,5 +20,9 @@ class UserPresenter(private val githubRepo: GithubRepositoryImpl, private val ro
     fun onBackPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    fun onItemClicked(login: String) {
+        router.navigateTo(DetailsUsersScreen(login))
     }
 }

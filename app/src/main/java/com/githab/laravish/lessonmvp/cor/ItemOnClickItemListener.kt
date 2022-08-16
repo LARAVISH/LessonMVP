@@ -2,6 +2,6 @@ package com.githab.laravish.lessonmvp.cor
 
 import com.githab.laravish.lessonmvp.model.GithubUser
 
-interface MyOnClickItemListener {
+interface ItemOnClickItemListener {
      fun onClick(item : GithubUser)
 }

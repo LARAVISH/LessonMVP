@@ -3,8 +3,7 @@ package com.githab.laravish.lessonmvp.main
 import android.os.Bundle
 import com.githab.laravish.lessonmvp.App
 import com.githab.laravish.lessonmvp.R
-import com.githab.laravish.lessonmvp.cor.OnBackPressed
-import com.githab.laravish.lessonmvp.cor.nav.UsersScreen
+import com.githab.laravish.lessonmvp.cor.OnBackPressedListener
 import com.githab.laravish.lessonmvp.databinding.ActivityMainBinding
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
@@ -14,7 +13,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private lateinit var binding: ActivityMainBinding
     private val presenter: MainPresenter by moxyPresenter {
-        MainPresenter(App.instance.router, UsersScreen())
+        MainPresenter(App.instance.router)
     }
 
     private val navigator = AppNavigator(this, R.id.container)
@@ -37,7 +36,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onBackPressed() {
         supportFragmentManager.fragments.forEach { currentFragment ->
-            if (currentFragment is OnBackPressed) {
+            if (currentFragment is OnBackPressedListener && currentFragment.onBackPressed()) {
                 return
             }
         }

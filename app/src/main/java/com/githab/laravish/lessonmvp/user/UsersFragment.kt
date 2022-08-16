@@ -5,25 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.githab.laravish.lessonmvp.App
-import com.githab.laravish.lessonmvp.cor.OnBackPressed
+import com.githab.laravish.lessonmvp.cor.ItemOnClickItemListener
+import com.githab.laravish.lessonmvp.cor.OnBackPressedListener
 import com.githab.laravish.lessonmvp.databinding.FragmentUsersBinding
-import com.githab.laravish.lessonmvp.main.adapter.UserAdapter
+import com.githab.laravish.lessonmvp.user.adapter.UserAdapter
 import com.githab.laravish.lessonmvp.model.GithubUser
 import com.githab.laravish.lessonmvp.repository.impl.GithubRepositoryImpl
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
-class UsersFragment : MvpAppCompatFragment(), UserView, OnBackPressed {
+class UsersFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener,
+    ItemOnClickItemListener {
 
     private var _binding: FragmentUsersBinding? = null
     private val binding: FragmentUsersBinding
         get() = _binding!!
 
-    private val adapter = UserAdapter()
     private val presenter by moxyPresenter {
         UserPresenter(GithubRepositoryImpl(), App.instance.router)
     }
+
+    private val adapter = UserAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +47,8 @@ class UsersFragment : MvpAppCompatFragment(), UserView, OnBackPressed {
             UsersFragment()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
@@ -53,8 +56,10 @@ class UsersFragment : MvpAppCompatFragment(), UserView, OnBackPressed {
         adapter.users = list
     }
 
-    override fun onBackPressed(): Boolean {
+    override fun onBackPressed() =
         presenter.onBackPressed()
-        return true
+
+    override fun onClick(item: GithubUser) {
+        presenter.onItemClicked(item.login)
     }
 }

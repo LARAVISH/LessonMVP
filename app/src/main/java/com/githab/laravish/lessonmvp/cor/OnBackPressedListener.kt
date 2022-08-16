@@ -1,5 +1,5 @@
 package com.githab.laravish.lessonmvp.cor
 
-interface OnBackPressed {
+interface OnBackPressedListener {
     fun onBackPressed():Boolean
 }
