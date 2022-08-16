@@ -1,46 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
-    <TextView
-        android:id="@+id/textViewOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/this_is_button" />
+<FrameLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_one" />
+</RelativeLayout>
 
-    <TextView
-        android:id="@+id/textViewTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/this_is_button_two" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_two" />
-
-    <TextView
-        android:id="@+id/textViewThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/this_is_button_three" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_three" />
-
-</androidx.appcompat.widget.LinearLayoutCompat>

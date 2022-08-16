@@ -7,4 +7,6 @@
     <string name="btn_one">Button 1</string>
     <string name="this_is_button_two">This is button number two</string>
     <string name="this_is_button_three">This is button number three</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user">User</string>
 </resources>
