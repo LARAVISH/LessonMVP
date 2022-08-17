@@ -14,7 +14,14 @@ class UserPresenter(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.initList(githubRepo.getUsers())
+        viewState.showLoading()
+        githubRepo.getUsers()
+            .subscribe({
+                       viewState.initList(it)
+                viewState.hideLoading()
+            },{
+                it.printStackTrace()
+            })
     }
 
     fun onBackPressed(): Boolean {

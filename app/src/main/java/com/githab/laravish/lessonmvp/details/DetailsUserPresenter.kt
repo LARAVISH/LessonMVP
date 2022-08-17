@@ -11,8 +11,15 @@ class DetailsUserPresenter(
 ) : MvpPresenter<DetailsUserView>() {
 
     fun loadUser(login: String) {
-        val user = githubRepo.getUserByLogin(login)
-        user.let { viewState.showLogin(login) }
+        viewState.showLoading()
+        githubRepo.getUserByLogin(login)
+            ?.subscribe({
+                viewState.showLogin(login)
+                viewState.hideLoading()
+            },
+                {
+                    it.printStackTrace()
+                })
     }
 
     fun onBackPressed(): Boolean {

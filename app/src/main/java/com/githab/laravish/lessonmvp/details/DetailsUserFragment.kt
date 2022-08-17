@@ -61,4 +61,12 @@ class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, OnBackPress
     override fun showLogin(login: String) = with(binding) {
         tvUserLogin.text = login
     }
+
+    override fun showLoading() = with(binding) {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() = with(binding) {
+        progressBar.visibility = View.GONE
+    }
 }
